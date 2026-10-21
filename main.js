@@ -10,12 +10,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Educação.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade investiu em educação, melhorando as escolas e ampliando as oportunidades para os estudantes."
       },
       {
         texto: "Saúde.",
-        afirmacao: "afirmacao"
-
+        afirmacao: "A cidade priorizou a saúde, melhorando o atendimento e o acesso aos serviços médicos."
       }
     ]
   },
@@ -24,11 +23,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Investir em infraestrutura.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade investiu em infraestrutura, melhorando o abastecimento de água para a população."
       },
       {
         texto: "Criar campanhas de conscientização.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade promoveu campanhas de conscientização, incentivando a população a economizar água."
       }
     ]
   },
@@ -37,11 +36,11 @@ const perguntas = [
     alternativas: [
       {
         texto: "Aumentar a coleta.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade aumentou a coleta de lixo, deixando as ruas mais limpas e melhorando a qualidade de vida."
       },
       {
         texto: "Investir em reciclagem.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade investiu em reciclagem, reduzindo a quantidade de resíduos descartados no meio ambiente."
       }
     ]
   },
@@ -50,11 +49,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " Melhorar o transporte público.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade melhorou o transporte público, incentivando seu uso e reduzindo o número de veículos nas ruas."
       },
       {
         texto: "Construir novas vias.",
-        afirmacao: "afirmacao"
+        afirmacao: "A cidade construiu novas vias, facilitando o deslocamento, mas aumentando os custos de infraestrutura."
       }
     ]
 
@@ -64,12 +63,11 @@ const perguntas = [
     alternativas: [
       {
         texto: " A cidade ficou mais sustentável.",
-        afirmacao: "afirmacao"
+        afirmacao: "Após quatro anos, a cidade se tornou mais sustentável, com avanços na preservação ambiental e na qualidade de vida."
       },
       {
         texto: "A cidade melhorou economicamente, mas ainda enfrenta problemas ambientais.",
-        afirmacao: "afirmacao"
-
+        afirmacao: "Após quatro anos, a cidade cresceu economicamente, mas ainda precisa investir em soluções para os problemas ambientais."
       }
     ]
   },
@@ -80,8 +78,13 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta() {
+  if (atual >= perguntas.length) {
+    mostraResultado();
+    return;
+  }
   perguntaAtual = perguntas[atual];
   caixaPerguntas.textContent = perguntaAtual.enunciado
+  caixaAlternativas.textContent = "";
   mostraAlternativas();
 }
 
@@ -94,9 +97,17 @@ function mostraAlternativas() {
   }
 }
 function respostaSelecionada(opcaoSelecionada) {
-  const afirmacoes = opcaoSelecionada.afirmacoes;
-  historiaFinal += afirmacoes + " ";
+  const afirmacao = opcaoSelecionada.afirmacao;
+  historiaFinal += afirmacao + " ";
   atual++;
   mostraPergunta();
 }
+
+function mostraResultado() {
+  caixaPerguntas.textContent = "Em 2030 ...";
+  textoResultado.textContent = historiaFinal;
+  caixaAlternativas.textContent = "";
+}
+
+
 mostraPergunta();
